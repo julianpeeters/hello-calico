@@ -26,9 +26,6 @@ import fs2.dom.*
 object Example extends IOWebApp:
 
   def render: Resource[IO, HtmlElement[IO]] =
-    // the name ref participates in two processes:
-    //   1. in - the entire string is used as update to the state, emitting nothing
-    //   2. out - the name ref gets mapped to upper case and the entire ref is passed
     SignallingRef[IO].of("world").toResource.flatMap { name =>
       div(
         label("Your name: "),
